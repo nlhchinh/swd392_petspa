@@ -144,8 +144,9 @@ public class PetServiceImpl implements PetService {
 
                     pet.setOwner(customer);
 
-                    Pet createpet = petRepository.save(pet);
-                    PetResponse petResponse = PetMapper.toPetResponse(createpet);
+                    Pet createPet = petRepository.save(pet);
+
+                    PetResponse petResponse = PetMapper.toPetResponse(createPet);
 
                     ResponseObj responseObj = ResponseObj.builder()
                             .message("Create Pet Profile Successfully")
@@ -194,9 +195,9 @@ public class PetServiceImpl implements PetService {
 
                     pet.setStatus(petRequest.getStatus());
 
-                    Pet updatepet = petRepository.save(pet);
+                    Pet updatePet = petRepository.save(pet);
 
-                    PetResponse petResponse = PetMapper.toPetResponse(updatepet);
+                    PetResponse petResponse = PetMapper.toPetResponse(updatePet);
 
                     ResponseObj responseObj = ResponseObj.builder()
                             .message("Update Pet Profile Successfully")
@@ -229,6 +230,7 @@ public class PetServiceImpl implements PetService {
             for (Pet pet : petlist) {
                 if (pet.equals(petdelete)) {
                     pet.setStatus(Status.INACTIVE);
+
                     petRepository.save(pet);
 
                     ResponseObj responseObj = ResponseObj.builder()
@@ -262,10 +264,14 @@ public class PetServiceImpl implements PetService {
             for (Pet pet : petlist) {
                 if (pet.equals(petdelete)) {
                     pet.setStatus(Status.ACTIVE);
-                    petRepository.save(pet);
+
+                    Pet restorePet = petRepository.save(pet);
+
+                    PetResponse petResponse = PetMapper.toPetResponse(restorePet);
 
                     ResponseObj responseObj = ResponseObj.builder()
                             .message("Restore Pet Profile Successfully")
+                            .data(petResponse)
                             .build();
                     return ResponseEntity.ok().body(responseObj);
                 }

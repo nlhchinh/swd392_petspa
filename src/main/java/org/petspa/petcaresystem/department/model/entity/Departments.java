@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import org.petspa.petcaresystem.doctor.model.Doctor;
+import org.petspa.petcaresystem.enums.Status;
 
 @Entity
 @Getter
@@ -31,6 +32,10 @@ public class Departments implements Serializable {
 
     @Column(name = "address", nullable = false)
     private String address;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude

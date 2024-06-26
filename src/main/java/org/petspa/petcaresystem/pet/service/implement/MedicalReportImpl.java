@@ -156,7 +156,8 @@ public class MedicalReportImpl implements MedicalRecordService {
 
                     MedicalRecord updateMedicalRecord = medicalRecordRepository.save(medicalrecord);
 
-                    MedicalRecordResponse medicalRecordResponse = MedicalRecordMapper.toMedicalRecordResponse(updateMedicalRecord);
+                    MedicalRecordResponse medicalRecordResponse = MedicalRecordMapper.
+                            toMedicalRecordResponse(updateMedicalRecord);
 
                     ResponseObj responseObj = ResponseObj.builder()
                             .message("Update Medical Record Successfully")
@@ -193,6 +194,7 @@ public class MedicalReportImpl implements MedicalRecordService {
                 if (medicalrecord.equals(medicalrecorddelete)) {
 
                     medicalrecord.setStatus(Status.INACTIVE);
+
                     medicalRecordRepository.save(medicalrecord);
 
                     ResponseObj responseObj = ResponseObj.builder()
@@ -229,10 +231,14 @@ public class MedicalReportImpl implements MedicalRecordService {
                 if (medicalrecord.equals(medicalrecordrestore)) {
 
                     medicalrecord.setStatus(Status.ACTIVE);
-                    medicalRecordRepository.save(medicalrecord);
+
+                    MedicalRecord restoreMedicalRecord = medicalRecordRepository.save(medicalrecord);
+
+                    MedicalRecordResponse medicalRecordResponse = MedicalRecordMapper.toMedicalRecordResponse(restoreMedicalRecord);
 
                     ResponseObj responseObj = ResponseObj.builder()
                             .message("Restore Medical Record Successfully")
+                            .data(medicalRecordResponse)
                             .build();
                     return ResponseEntity.ok().body(responseObj);
 

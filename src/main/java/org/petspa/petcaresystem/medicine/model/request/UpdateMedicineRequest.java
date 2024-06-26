@@ -4,8 +4,6 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import org.petspa.petcaresystem.enums.Status;
-import org.petspa.petcaresystem.pet.model.entity.MedicalRecord;
-
 import java.util.Collection;
 
 @Data

@@ -99,9 +99,9 @@ public class MedicineServiceImpl implements MedicineService{
 
                     medicine.setMedicalRecord((Collection<MedicalRecord>) record);
 
-                    Medicine createmedicine = medicineRepository.save(medicine);
+                    Medicine createMedicine = medicineRepository.save(medicine);
 
-                    MedicineResponse medicineResponse = MedicineMapper.toMedicineResponse(createmedicine);
+                    MedicineResponse medicineResponse = MedicineMapper.toMedicineResponse(createMedicine);
 
                     ResponseObj responseObj = ResponseObj.builder()
                             .message("Create Medicine Successfully")
@@ -146,9 +146,9 @@ public class MedicineServiceImpl implements MedicineService{
 
                     medicine.setMedicalRecord(medicalRecordList);
 
-                    Medicine createmedicine = medicineRepository.save(medicine);
+                    Medicine updateMedicine = medicineRepository.save(medicine);
 
-                    MedicineResponse medicineResponse = MedicineMapper.toMedicineResponse(createmedicine);
+                    MedicineResponse medicineResponse = MedicineMapper.toMedicineResponse(updateMedicine);
 
                     ResponseObj responseObj = ResponseObj.builder()
                             .message("Update Medicine Successfully")
@@ -183,13 +183,10 @@ public class MedicineServiceImpl implements MedicineService{
 
                     medicine.setStatus(Status.INACTIVE);
 
-                    Medicine deletemedicine = medicineRepository.save(medicine);
-
-                    MedicineResponse medicineResponse = MedicineMapper.toMedicineResponse(deletemedicine);
+                    medicineRepository.save(medicine);
 
                     ResponseObj responseObj = ResponseObj.builder()
                             .message("Delete Medicine Successfully")
-                            .data(medicineResponse)
                             .build();
                     return ResponseEntity.ok().body(responseObj);
                 }
@@ -220,9 +217,9 @@ public class MedicineServiceImpl implements MedicineService{
 
                     medicine.setStatus(Status.ACTIVE);
 
-                    Medicine deletemedicine = medicineRepository.save(medicine);
+                    Medicine restoreMedicine = medicineRepository.save(medicine);
 
-                    MedicineResponse medicineResponse = MedicineMapper.toMedicineResponse(deletemedicine);
+                    MedicineResponse medicineResponse = MedicineMapper.toMedicineResponse(restoreMedicine);
 
                     ResponseObj responseObj = ResponseObj.builder()
                             .message("Restore Medicine Successfully")
